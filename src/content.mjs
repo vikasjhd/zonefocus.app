@@ -51,6 +51,7 @@ const en = {
     screenTimeGuide: 'Screen Time alternative',
     doomscrollingGuide: 'Stop doomscrolling',
     press: 'Press',
+    webAnalytics: ['Website analytics', 'This website uses Cloudflare Web Analytics to understand aggregate visits, referring sites, countries, devices, and page performance. Cloudflare states that Web Analytics does not collect or use visitors’ personal data and does not use cookies or localStorage. This is separate from the Zone app, which does not include third-party analytics.'],
     onThisPage: 'On this page',
     related: 'Related guide',
     ctaTitle: 'Make the next hour yours.',

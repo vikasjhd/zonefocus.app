@@ -7,7 +7,6 @@
   <meta name="description" content="Block distracting apps and websites during timed focus sessions. Zone is a strict, private focus timer for iPhone and iPad.">
   <meta name="theme-color" content="#05070b">
   <meta name="apple-itunes-app" content="app-id=6763581982">
-  
   <link rel="canonical" href="https://zonefocus.app/en-au/">
   <link rel="alternate" hreflang="en-US" href="https://zonefocus.app/">
     <link rel="alternate" hreflang="en-GB" href="https://zonefocus.app/en-gb/">
@@ -34,11 +33,11 @@
   <meta name="twitter:image" content="https://zonefocus.app/assets/social/zonefocus-og.png">
   <link rel="icon" href="/assets/app-icon.png" sizes="any">
   <link rel="apple-touch-icon" href="/assets/app-icon.png">
+  <link rel="preload" as="image" href="/assets/screens/en-au/timer.png">
   <link rel="stylesheet" href="/assets/styles.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Zone","url":"https://zonefocus.app","inLanguage":"en-AU","publisher":{"@type":"Person","name":"Vikas Saini"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"MobileApplication","name":"Zone: App Blocker & Focus","operatingSystem":"iOS 18 or later; iPadOS 18 or later","applicationCategory":"ProductivityApplication","description":"Block distracting apps and websites during timed focus sessions. Zone is a strict, private focus timer for iPhone and iPad.","url":"https://zonefocus.app/en-au/","downloadUrl":"https://apps.apple.com/app/id6763581982","image":"https://zonefocus.app/assets/app-icon.png","author":{"@type":"Person","name":"Vikas Saini"},"sameAs":["https://apps.apple.com/app/id6763581982"]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","inLanguage":"en-AU","mainEntity":[{"@type":"Question","name":"What does Zone block?","acceptedAnswer":{"@type":"Answer","text":"Zone can restrict selected apps and websites while a focus session is active. Apple’s Screen Time frameworks apply the restrictions on the device."}},{"@type":"Question","name":"Can Zone see which apps or websites I select?","acceptedAnswer":{"@type":"Answer","text":"No. Apple provides Zone with opaque selections, so the app can apply your choices without learning which specific apps or websites you picked."}},{"@type":"Question","name":"Can I end a focus session early?","acceptedAnswer":{"@type":"Answer","text":"Normal sessions can be ended early. Strict Mode is designed to make that choice harder, so use it only when you are comfortable committing to the selected duration."}},{"@type":"Question","name":"Does Zone require an account?","acceptedAnswer":{"@type":"Answer","text":"No. You can use Zone without creating an account."}},{"@type":"Question","name":"Which devices are supported?","acceptedAnswer":{"@type":"Answer","text":"Zone is available for compatible iPhone and iPad devices running iOS or iPadOS 18 or later."}},{"@type":"Question","name":"Does Zone work with Apple Health?","acceptedAnswer":{"@type":"Answer","text":"Optionally. If you grant permission, Zone can save completed focus sessions as Mindful Minutes."}},{"@type":"Question","name":"Is Zone an addiction treatment?","acceptedAnswer":{"@type":"Answer","text":"No. Zone is a productivity tool that adds practical friction around distracting apps and websites; it is not medical treatment."}}]}</script>
-  
 </head>
 <body data-page="home">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -82,7 +81,7 @@
       <div class="phone-stage" aria-label="Zone focus timer shown on iPhone">
         <div class="phone-glow"></div>
         <div class="proof-card top"><div class="proof-icon" aria-hidden="true">◇</div><div><strong>Strict Mode</strong><span>Make a running session harder to quit</span></div></div>
-        <div class="phone"><img src="/assets/screens/en-au/timer.png" width="660" height="1434" alt="Zone focus timer running on iPhone"></div>
+        <div class="phone"><img src="/assets/screens/en-au/timer.png" width="660" height="1434" fetchpriority="high" alt="Zone focus timer running on iPhone"></div>
         <div class="proof-card bottom"><div class="proof-icon" aria-hidden="true">✓</div><div><strong>Private by default</strong><span>No account. Your selections stay private.</span></div></div>
       </div>
     </div>

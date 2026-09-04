@@ -207,8 +207,7 @@ function documentShell({ locale, page, title, description, body, schemas = [] })
   <meta name="description" content="${escapeHtml(description)}">
   <meta name="theme-color" content="#05070b">
   <meta name="apple-itunes-app" content="app-id=${site.appStoreId}">
-  ${verification}
-  <link rel="canonical" href="${canonical}">
+${verification ? `  ${verification}\n` : ''}  <link rel="canonical" href="${canonical}">
   ${localeLinks(locale, page.slug)}
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Zone">
@@ -224,9 +223,8 @@ function documentShell({ locale, page, title, description, body, schemas = [] })
   <meta name="twitter:image" content="${site.origin}${asset('social/zonefocus-og.png')}">
   <link rel="icon" href="${asset('app-icon.png')}" sizes="any">
   <link rel="apple-touch-icon" href="${asset('app-icon.png')}">
-  <link rel="stylesheet" href="${asset('styles.css')}">
-  ${schemas.map(schemaScript).join('\n  ')}
-  ${analytics}
+${page.key === 'home' ? `  <link rel="preload" as="image" href="${asset(`screens/${locale.prefix || 'en'}/timer.png`)}">\n` : ''}  <link rel="stylesheet" href="${asset('styles.css')}">
+  ${schemas.map(schemaScript).join('\n  ')}${analytics ? `\n  ${analytics}` : ''}
 </head>
 <body data-page="${page.key}">
   <a class="skip-link" href="#main">${escapeHtml(locale.common.skipContent)}</a>
@@ -261,7 +259,7 @@ function renderHome(locale) {
       <div class="phone-stage" aria-label="Zone focus timer shown on iPhone">
         <div class="phone-glow"></div>
         <div class="proof-card top"><div class="proof-icon" aria-hidden="true">◇</div><div><strong>${escapeHtml(copy.proofOneTitle)}</strong><span>${escapeHtml(copy.proofOneBody)}</span></div></div>
-        <div class="phone"><img src="${asset(`screens/${locale.prefix || 'en'}/timer.png`)}" width="660" height="1434" alt="${escapeHtml(copy.timerAlt)}"></div>
+        <div class="phone"><img src="${asset(`screens/${locale.prefix || 'en'}/timer.png`)}" width="660" height="1434" fetchpriority="high" alt="${escapeHtml(copy.timerAlt)}"></div>
         <div class="proof-card bottom"><div class="proof-icon" aria-hidden="true">✓</div><div><strong>${escapeHtml(copy.proofTwoTitle)}</strong><span>${escapeHtml(copy.proofTwoBody)}</span></div></div>
       </div>
     </div>
@@ -349,8 +347,12 @@ function renderSection(locale, section) {
 function renderArticle(locale, page) {
   const article = locale.articles[page.key];
   const isFaq = page.key === 'faq';
-  const bodyContent = isFaq ? renderFaqs(locale) : article.sections.map((section) => renderSection(locale, section)).join('');
-  const nav = isFaq ? '' : `<aside class="article-nav"><strong>${escapeHtml(locale.common.onThisPage)}</strong>${article.sections.map((section) => `<a href="#${section.id}">${escapeHtml(section.title)}</a>`).join('')}</aside>`;
+  const sections = [...article.sections];
+  if (page.key === 'privacy' && analyticsToken) {
+    sections.splice(-1, 0, { id: 'website-analytics', title: locale.common.webAnalytics[0], paragraphs: [locale.common.webAnalytics[1]] });
+  }
+  const bodyContent = isFaq ? renderFaqs(locale) : sections.map((section) => renderSection(locale, section)).join('');
+  const nav = isFaq ? '' : `<aside class="article-nav"><strong>${escapeHtml(locale.common.onThisPage)}</strong>${sections.map((section) => `<a href="#${section.id}">${escapeHtml(section.title)}</a>`).join('')}</aside>`;
   const body = `
     <section class="page-hero">
       <div class="shell">
