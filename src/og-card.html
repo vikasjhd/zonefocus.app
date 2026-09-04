@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zone social card</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { width: 1200px; height: 630px; margin: 0; overflow: hidden; }
+    body {
+      position: relative;
+      display: gridpx;
+      background:
+        radial-gradient(circle at 83% 20%, rgba(47,124,255,.45), transparent 310px),
+        radial-gradient(circle at 14% 95%, rgba(255,138,54,.14), transparent 280px),
+        #05070b;
+      color: #f7f9fd;
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+    }
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .22;
+      background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size: 54px 54px;
+      mask-image: linear-gradient(90deg, black, transparent 82%);
+    }
+    .content { position: absolute; left: 76px; top: 70px; z-index: 2; width: 800px; }
+    .brand { display:flex; align-items:center; gap:16px; font-size:28px; font-weight:760; letter-spacing:-.04em; }
+    .brand img { width:62px; height:62px; border-radius:15px; box-shadow:0 15px 38px rgba(47,124,255,.28); }
+    h1 { max-width:850px; margin:76px 0 24px; font-size:86px; line-height:.94; letter-spacing:-.072em; }
+    h1 span { display:block; color:#78a8ff; }
+    p { margin:0; color:#adb8c8; font-size:26px; letter-spacing:-.02em; }
+    .ring { position:absolute; right:-52px; bottom:-145px; width:530px; height:530px; border:60px solid rgba(117,167,255,.12); border-radius:50%; }
+    .ring::after { content:""; position:absolute; inset:45px; border:2px solid rgba(255,255,255,.12); border-radius:50%; }
+    .pill { position:absolute; right:72px; top:74px; z-index:3; padding:13px 19px; border:1px solid rgba(255,255,255,.16); border-radius:999px; background:rgba(10,15,23,.75); color:#c7d7f8; font-size:17px; font-weight:700; }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <div class="brand"><img src="/assets/app-icon.png" alt="">Zone</div>
+    <h1>Block the noise.<span>Enter your zone.</span></h1>
+    <p>Strict app &amp; website blocking for iPhone and iPad.</p>
+  </div>
+  <div class="pill">zonefocus.app</div>
+  <div class="ring"></div>
+</body>
+</html>

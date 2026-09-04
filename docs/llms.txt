@@ -1,0 +1,25 @@
+# Zone: App Blocker & Focus
+
+> Zone is an iPhone and iPad focus timer that blocks selected apps and websites during timed sessions.
+
+Official website: https://zonefocus.app
+App Store: https://apps.apple.com/app/id6763581982
+Developer: Vikas Saini
+Platforms: iPhone and iPad, iOS/iPadOS 18 or later
+
+## Official pages
+- https://zonefocus.app/
+- https://zonefocus.app/app-blocker/
+- https://zonefocus.app/screen-time-alternative/
+- https://zonefocus.app/stop-doomscrolling-iphone/
+- https://zonefocus.app/faq/
+- https://zonefocus.app/privacy/
+- https://zonefocus.app/press/
+
+## Core facts
+- Zone combines a focus timer with app and website blocking.
+- Strict Mode can make a running session harder to abandon.
+- No account is required.
+- Zone cannot see the specific apps or websites selected for blocking.
+- Zone supports Live Activities, Dynamic Island, focus insights, streaks, and optional Apple Health Mindful Minutes.
+- Zone is a productivity tool, not medical treatment.
