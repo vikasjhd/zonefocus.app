@@ -4,6 +4,7 @@ export const site = {
   legalBaseUrl: 'https://vikasjhd.github.io/zone-privacy',
   name: 'Zone: App Blocker & Focus',
   developer: 'Vikas Saini',
+  contactEmail: 'contact@zonefocus.app',
   appStoreId: '6763581982'
 };
 
@@ -14,7 +15,8 @@ export const pages = [
   { key: 'doomscrolling', slug: 'stop-doomscrolling-iphone' },
   { key: 'faq', slug: 'faq' },
   { key: 'privacy', slug: 'privacy' },
-  { key: 'press', slug: 'press' }
+  { key: 'press', slug: 'press' },
+  { key: 'contact', slug: 'contact' }
 ];
 
 const en = {
@@ -51,6 +53,7 @@ const en = {
     screenTimeGuide: 'Screen Time alternative',
     doomscrollingGuide: 'Stop doomscrolling',
     press: 'Press',
+    contact: 'Contact',
     webAnalytics: ['Website analytics', 'This website uses Cloudflare Web Analytics to understand aggregate visits, referring sites, countries, devices, and page performance. Cloudflare states that Web Analytics does not collect or use visitors’ personal data and does not use cookies or localStorage. This is separate from the Zone app, which does not include third-party analytics.'],
     onThisPage: 'On this page',
     related: 'Related guide',
@@ -201,11 +204,23 @@ const en = {
       title: 'The essential facts about Zone.',
       intro: 'A concise, factual reference for writers, reviewers, creators, and anyone evaluating Zone.',
       sections: [
-        { id: 'summary', title: 'Product summary', paragraphs: ['Zone: App Blocker & Focus is an iPhone and iPad productivity app by independent developer Vikas Saini. It combines timed focus sessions with selected app and website restrictions, optional Strict Mode, Live Activities, Dynamic Island support, and private focus insights.'] },
+        { id: 'summary', title: 'Product summary', paragraphs: ['Zone: App Blocker & Focus is an iPhone and iPad productivity app by independent developer Vikas Saini. Unlike a timer that only counts down, Zone can restrict selected apps and websites for the duration of a focus session. Optional Strict Mode adds commitment, while Live Activities, Dynamic Island support, and private focus insights help users stay on track without repeatedly reopening the app.'] },
         { id: 'facts', title: 'Quick facts', facts: [['Product', 'Zone: App Blocker & Focus'], ['Developer', 'Vikas Saini'], ['Platforms', 'iPhone and iPad'], ['Requirement', 'iOS or iPadOS 18 or later'], ['Category', 'Productivity'], ['Account', 'Not required']] },
-        { id: 'angles', title: 'What makes Zone distinct', bullets: ['The focus timer and blocker are one workflow.', 'Strict Mode adds commitment for sessions that should not be easy to abandon.', 'Blocking selections are opaque to the app and developer.', 'Live Activities keep the countdown visible without reopening the app.'] },
-        { id: 'assets', title: 'Official assets', paragraphs: ['The app icon and localized product screenshots on this site may be used when accurately covering or reviewing Zone. Do not imply endorsement or alter the icon.'], link: ['View Zone on the App Store', 'appstore'] },
-        { id: 'contact', title: 'Contact', paragraphs: ['For product questions, reviews, or press inquiries, contact the developer through the support channel linked from the App Store listing.'] }
+        { id: 'angles', title: 'What makes Zone distinct', bullets: ['The timer and blocker work as one session: choose distractions, choose a duration, then focus.', 'Strict Mode adds deliberate friction when a session should not be easy to abandon.', 'Apple provides opaque blocking selections, so Zone and its developer cannot see the specific apps or websites selected.', 'Live Activities and Dynamic Island keep the countdown visible without inviting another trip through the phone.'] },
+        { id: 'assets', title: 'Official assets', paragraphs: ['The app icon and localized product screenshots below may be used when accurately covering or reviewing Zone. Do not imply endorsement or alter the icon.'], downloads: [['App icon', 'app-icon.png'], ['Focus timer screenshot', 'timer.png'], ['App selection screenshot', 'app-picker.png'], ['Focus insights screenshot', 'insights.png']], downloadLabel: 'Download PNG', link: ['View Zone on the App Store', 'appstore'] },
+        { id: 'contact', title: 'Contact', paragraphs: ['For product questions, review access, interviews, or press inquiries, contact the developer directly.'], emailLabel: 'Email the developer' }
+      ]
+    },
+    contact: {
+      metaTitle: 'Contact Zone — Support, Feedback & Press',
+      metaDescription: 'Contact the independent developer of Zone for app support, feature suggestions, feedback, reviews, or press inquiries.',
+      eyebrow: 'Contact Zone',
+      title: 'Questions, feedback, or something to share?',
+      intro: 'Contact the independent developer behind Zone for support, suggestions, reviews, press, or other product-related inquiries.',
+      sections: [
+        { id: 'email', title: 'Email Zone', paragraphs: ['Send your message to the address below. Messages are reviewed by the developer, and response times may vary.'], emailLabel: 'Send an email' },
+        { id: 'helpful-details', title: 'Helpful details for support', paragraphs: ['For a technical issue, including a few relevant details can make it easier to investigate.'], bullets: ['Your iPhone or iPad model', 'Your iOS or iPadOS version', 'Your Zone app version', 'What you expected and what happened instead'] },
+        { id: 'privacy-note', title: 'Before you send', paragraphs: ['Please do not include passwords, payment details, or other highly sensitive information. Share information about your blocking selections or focus history only when it is relevant and you are comfortable doing so.'] }
       ]
     }
   }

@@ -1,11 +1,13 @@
 import { access, readFile, readdir } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { locales, pages } from './content.mjs';
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const docs = join(root, 'docs');
 const failures = [];
 const warnings = [];
+const expectedPageCount = Object.keys(locales).length * pages.length;
 
 async function walk(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
@@ -19,7 +21,7 @@ async function walk(directory) {
 }
 
 const htmlFiles = (await walk(docs)).filter((file) => file.endsWith('.html'));
-if (htmlFiles.length !== 70) failures.push(`Expected 70 HTML pages; found ${htmlFiles.length}`);
+if (htmlFiles.length !== expectedPageCount) failures.push(`Expected ${expectedPageCount} HTML pages; found ${htmlFiles.length}`);
 
 for (const file of htmlFiles) {
   const html = await readFile(file, 'utf8');
@@ -56,7 +58,7 @@ for (const file of htmlFiles) {
 
 const sitemap = await readFile(join(docs, 'sitemap.xml'), 'utf8');
 const sitemapUrls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => match[1]);
-if (sitemapUrls.length !== 70) failures.push(`Expected 70 sitemap URLs; found ${sitemapUrls.length}`);
+if (sitemapUrls.length !== expectedPageCount) failures.push(`Expected ${expectedPageCount} sitemap URLs; found ${sitemapUrls.length}`);
 if (new Set(sitemapUrls).size !== sitemapUrls.length) failures.push('Sitemap contains duplicate URLs');
 
 const robots = await readFile(join(docs, 'robots.txt'), 'utf8');

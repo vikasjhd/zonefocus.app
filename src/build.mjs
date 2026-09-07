@@ -25,6 +25,7 @@ const routeFor = (locale, slug = '') => {
 const pageFor = (key) => pages.find((page) => page.key === key);
 const canonicalFor = (locale, slug) => `${site.origin}${routeFor(locale, slug)}`;
 const asset = (path) => `/assets/${path}`;
+const contactLabelFor = (locale) => ({ es: 'Contacto', 'es-mx': 'Contacto', 'pt-br': 'Contato', fr: 'Contact', de: 'Kontakt', it: 'Contatti' }[locale.prefix] || 'Contact');
 
 const localeLinks = (currentLocale, slug) => Object.values(locales).map((locale) =>
   `<link rel="alternate" hreflang="${locale.hreflang}" href="${canonicalFor(locale, slug)}">`
@@ -161,6 +162,7 @@ function footer(locale) {
           <div class="footer-links">
             <a href="${routeFor(locale, pageFor('privacy').slug)}">${escapeHtml(locale.nav.privacy)}</a>
             <a href="${routeFor(locale, pageFor('press').slug)}">${escapeHtml(locale.common.press)}</a>
+            <a href="${routeFor(locale, pageFor('contact').slug)}">${escapeHtml(contactLabelFor(locale))}</a>
             <a href="${site.legalBaseUrl}/${locale.legalLocale}/privacy.html">${escapeHtml(locale.common.legalPolicy)}</a>
           </div>
         </div>
@@ -336,12 +338,19 @@ function renderSection(locale, section) {
   const callout = section.callout ? `<div class="info-box"><strong>${escapeHtml(section.callout[0])}</strong>${escapeHtml(section.callout[1])}</div>` : '';
   const comparison = section.comparison ? `<div class="comparison-wrap"><table class="comparison">${section.comparison.map((row, index) => `<tr>${row.map((cell) => `<${index === 0 ? 'th' : 'td'}>${escapeHtml(cell)}</${index === 0 ? 'th' : 'td'}>`).join('')}</tr>`).join('')}</table></div>` : '';
   const facts = section.facts ? `<div class="fact-grid">${section.facts.map(([label, value]) => `<div class="fact"><strong>${escapeHtml(label)}</strong><span>${escapeHtml(value)}</span></div>`).join('')}</div>` : '';
+  const downloads = section.downloads ? `<div class="download-grid">${section.downloads.map(([label, file]) => {
+    const isIcon = file === 'app-icon.png';
+    const path = isIcon ? file : `screens/${locale.prefix || 'en'}/${file}`;
+    const downloadName = isIcon ? 'zone-app-icon.png' : `zone-${locale.prefix || 'en'}-${file}`;
+    return `<a class="download-card" href="${asset(path)}" download="${downloadName}"><strong>${escapeHtml(label)}</strong><span>${escapeHtml(section.downloadLabel)} ↓</span></a>`;
+  }).join('')}</div>` : '';
+  const email = section.emailLabel ? `<p><a class="button" href="mailto:${escapeHtml(site.contactEmail)}">${escapeHtml(section.emailLabel)} →</a></p><p class="contact-address">${escapeHtml(site.contactEmail)}</p>` : '';
   let link = '';
   if (section.link) {
     const href = section.link[1] === 'legal' ? `${site.legalBaseUrl}/${locale.legalLocale}/privacy.html` : site.appStoreUrl;
     link = `<p><a class="button" href="${href}"${section.link[1] === 'appstore' ? ' data-app-store-link data-placement="article"' : ''}>${escapeHtml(section.link[0])} →</a></p>`;
   }
-  return `<section aria-labelledby="${section.id}"><h2 id="${section.id}">${escapeHtml(section.title)}</h2>${paragraphs}${bullets}${steps}${comparison}${facts}${callout}${link}</section>`;
+  return `<section aria-labelledby="${section.id}"><h2 id="${section.id}">${escapeHtml(section.title)}</h2>${paragraphs}${bullets}${steps}${comparison}${facts}${downloads}${callout}${email}${link}</section>`;
 }
 
 function renderArticle(locale, page) {
@@ -403,7 +412,7 @@ async function build() {
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((url) => `  <url><loc>${url}</loc><lastmod>${now}</lastmod></url>`).join('\n')}\n</urlset>\n`;
   await writeFile(join(outputDir, 'sitemap.xml'), sitemap);
   await writeFile(join(outputDir, 'robots.txt'), `User-agent: *\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\nSitemap: ${site.origin}/sitemap.xml\n`);
-  await writeFile(join(outputDir, 'llms.txt'), `# Zone: App Blocker & Focus\n\n> Zone is an iPhone and iPad focus timer that blocks selected apps and websites during timed sessions.\n\nOfficial website: ${site.origin}\nApp Store: ${site.appStoreUrl}\nDeveloper: ${site.developer}\nPlatforms: iPhone and iPad, iOS/iPadOS 18 or later\n\n## Official pages\n${pages.map((page) => `- ${site.origin}${routeFor(locales.en, page.slug)}`).join('\n')}\n\n## Core facts\n- Zone combines a focus timer with app and website blocking.\n- Strict Mode can make a running session harder to abandon.\n- No account is required.\n- Zone cannot see the specific apps or websites selected for blocking.\n- Zone supports Live Activities, Dynamic Island, focus insights, streaks, and optional Apple Health Mindful Minutes.\n- Zone is a productivity tool, not medical treatment.\n`);
+  await writeFile(join(outputDir, 'llms.txt'), `# Zone: App Blocker & Focus\n\n> Zone is an iPhone and iPad focus timer that blocks selected apps and websites during timed sessions.\n\nOfficial website: ${site.origin}\nApp Store: ${site.appStoreUrl}\nDeveloper: ${site.developer}\nContact: ${site.contactEmail}\nPlatforms: iPhone and iPad, iOS/iPadOS 18 or later\n\n## Official pages\n${pages.map((page) => `- ${site.origin}${routeFor(locales.en, page.slug)}`).join('\n')}\n\n## Core facts\n- Zone combines a focus timer with app and website blocking.\n- Strict Mode can make a running session harder to abandon.\n- No account is required.\n- Zone cannot see the specific apps or websites selected for blocking.\n- Zone supports Live Activities, Dynamic Island, focus insights, streaks, and optional Apple Health Mindful Minutes.\n- Zone is a productivity tool, not medical treatment.\n`);
   await writeFile(join(outputDir, 'CNAME'), 'zonefocus.app\n');
   await writeFile(join(outputDir, '.nojekyll'), '');
   console.log(`Built ${urls.length} pages in ${outputDir}`);

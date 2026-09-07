@@ -5,6 +5,7 @@
 Official website: https://zonefocus.app
 App Store: https://apps.apple.com/app/id6763581982
 Developer: Vikas Saini
+Contact: contact@zonefocus.app
 Platforms: iPhone and iPad, iOS/iPadOS 18 or later
 
 ## Official pages
@@ -15,6 +16,7 @@ Platforms: iPhone and iPad, iOS/iPadOS 18 or later
 - https://zonefocus.app/faq/
 - https://zonefocus.app/privacy/
 - https://zonefocus.app/press/
+- https://zonefocus.app/contact/
 
 ## Core facts
 - Zone combines a focus timer with app and website blocking.
