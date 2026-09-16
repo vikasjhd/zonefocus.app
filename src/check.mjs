@@ -40,13 +40,19 @@ for (const file of htmlFiles) {
   if (matches(/rel="alternate" hreflang=/g).length !== 11) failures.push(`${relative}: expected 11 hreflang links`);
   if (!/<meta name="apple-itunes-app" content="app-id=6763581982">/.test(html)) failures.push(`${relative}: missing Smart App Banner`);
   if (!html.includes('data-app-store-link')) failures.push(`${relative}: missing App Store CTA tracking hook`);
+  if (html.includes('data-page="home"')) {
+    if (!html.includes('rel="preload" as="image" type="image/webp"')) failures.push(`${relative}: missing optimized hero preload`);
+    if (!html.includes('timer-330.webp') || !html.includes('timer-660.webp')) failures.push(`${relative}: missing responsive hero sources`);
+  }
 
   for (const match of matches(/<script type="application\/ld\+json">(.*?)<\/script>/gs)) {
     try { JSON.parse(match[1]); }
     catch { failures.push(`${relative}: invalid JSON-LD`); }
   }
 
-  const urls = matches(/(?:href|src)="(\/[^"]*)"/g).map((match) => match[1]);
+  const srcsetUrls = matches(/(?:imagesrcset|srcset)="([^"]+)"/g)
+    .flatMap((match) => match[1].split(',').map((candidate) => candidate.trim().split(/\s+/)[0]));
+  const urls = matches(/(?:href|src)="(\/[^"]*)"/g).map((match) => match[1]).concat(srcsetUrls);
   for (const url of urls) {
     const clean = url.split('#')[0].split('?')[0];
     if (!clean) continue;

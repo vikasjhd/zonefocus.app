@@ -225,7 +225,7 @@ ${verification ? `  ${verification}\n` : ''}  <link rel="canonical" href="${cano
   <meta name="twitter:image" content="${site.origin}${asset('social/zonefocus-og.png')}">
   <link rel="icon" href="${asset('app-icon.png')}" sizes="any">
   <link rel="apple-touch-icon" href="${asset('app-icon.png')}">
-${page.key === 'home' ? `  <link rel="preload" as="image" href="${asset(`screens/${locale.prefix || 'en'}/timer.png`)}">\n` : ''}  <link rel="stylesheet" href="${asset('styles.css')}">
+${page.key === 'home' ? `  <link rel="preload" as="image" type="image/webp" imagesrcset="${asset(`screens/${locale.prefix || 'en'}/timer-330.webp`)} 1x, ${asset(`screens/${locale.prefix || 'en'}/timer-660.webp`)} 2x" fetchpriority="high">\n` : ''}  <link rel="stylesheet" href="${asset('styles.css')}">
   ${schemas.map(schemaScript).join('\n  ')}${analytics ? `\n  ${analytics}` : ''}
 </head>
 <body data-page="${page.key}">
@@ -261,7 +261,7 @@ function renderHome(locale) {
       <div class="phone-stage" aria-label="Zone focus timer shown on iPhone">
         <div class="phone-glow"></div>
         <div class="proof-card top"><div class="proof-icon" aria-hidden="true">◇</div><div><strong>${escapeHtml(copy.proofOneTitle)}</strong><span>${escapeHtml(copy.proofOneBody)}</span></div></div>
-        <div class="phone"><img src="${asset(`screens/${locale.prefix || 'en'}/timer.png`)}" width="660" height="1434" fetchpriority="high" alt="${escapeHtml(copy.timerAlt)}"></div>
+        <div class="phone"><picture><source type="image/webp" srcset="${asset(`screens/${locale.prefix || 'en'}/timer-330.webp`)} 1x, ${asset(`screens/${locale.prefix || 'en'}/timer-660.webp`)} 2x"><img src="${asset(`screens/${locale.prefix || 'en'}/timer.png`)}" width="660" height="1434" fetchpriority="high" alt="${escapeHtml(copy.timerAlt)}"></picture></div>
         <div class="proof-card bottom"><div class="proof-icon" aria-hidden="true">✓</div><div><strong>${escapeHtml(copy.proofTwoTitle)}</strong><span>${escapeHtml(copy.proofTwoBody)}</span></div></div>
       </div>
     </div>
